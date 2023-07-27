@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import SearchIcon from "../../assets/svg/magnifying-glass-solid.svg";
-import Logo from "../../components/Logo/Logo";
-import SearchBoxCard from "../../components/SearchBoxCard/SearchBoxCard";
+import Logo from "../../components/Logo";
+import SearchBoxCard from "../../components/SearchBoxCard";
 import {
   TrendDataType,
   TrendsData,
@@ -30,7 +30,6 @@ const Home = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setShowTrends(true)}
-          onBlur={() => setShowTrends(false)}
         />
         <button>
           <img src={SearchIcon} alt="search" />
