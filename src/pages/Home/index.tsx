@@ -1,11 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchIcon from "../../assets/svg/magnifying-glass-solid.svg";
 import Logo from "../../components/Logo/Logo";
+import SearchBoxCard from "../../components/SearchBoxCard/SearchBoxCard";
+import {
+  TrendDataType,
+  TrendsData,
+  SuggestionData,
+} from "../../helpers/fakerData";
 import "./Home.scss";
 
 const Home = () => {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState<string>("");
   const [showTrends, setShowTrends] = useState(false);
+  const [trendsData, setTrendsData] = useState<TrendDataType[]>([]);
+  const [suggestionData, setSuggestionData] = useState<string[]>([]);
+
+  useEffect(() => {
+    setTrendsData(TrendsData);
+    setSuggestionData(SuggestionData);
+  }, []);
 
   return (
     <div className="home">
@@ -24,7 +37,13 @@ const Home = () => {
         </button>
       </div>
 
-      {showTrends ? <></> : <></>}
+      {showTrends && (
+        <SearchBoxCard
+          suggestionData={suggestionData}
+          setQuery={setQuery}
+          trendsData={trendsData}
+        />
+      )}
     </div>
   );
 };
