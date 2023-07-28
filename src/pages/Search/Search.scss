@@ -94,6 +94,7 @@
               list-style: none;
               display: flex;
               flex-direction: column;
+              gap: 1rem;
 
               li {
                 display: flex;
@@ -125,6 +126,9 @@
     .search-products {
       flex: 80%;
       display: flex;
+      width: 80%;
+      display: grid !important;
+      grid-template-columns: repeat(4, auto);
     }
   }
 }

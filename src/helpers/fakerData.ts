@@ -50,6 +50,9 @@ const getProductData = () => {
   const productData: ProductType[] = [];
 
   for (let i = 0; i < 20; i++) {
+    // const rand1 = Math.floor(Math.random() * (500 - 200 + 1)) + 200;
+    // const rand2 = Math.floor(Math.random() * (500 - 200 + 1)) + 200;
+    // const imgUrl: string = faker.image.urlLoremFlickr({ category: "person" });
     const imgUrl: string = faker.image.people(300, 400);
     const productName: string = faker.commerce.productName();
     // Hard-coded the value for demo purposes

@@ -7,11 +7,6 @@ import ArrowDownSVG from "../../assets/svg/angle-down-solid.svg";
 import SearchIcon from "../../assets/svg/magnifying-glass-solid.svg";
 import "./Search.scss";
 
-type SearchResultsSectionPropsType = {
-  productData: ProductType[];
-  searchQuery: string;
-};
-
 type FilterType = {
   rating: boolean[];
   price: boolean[];
@@ -23,13 +18,11 @@ type ExpandFilterType = {
 };
 
 const Search = () => {
-  const [products, setProducts] = useState<ProductType[]>([]);
   const [filteredData, setFilteredData] = useState<ProductType[]>([]);
   const [filters, setFilters] = useState<FilterType>({
     rating: [false, false, false, false, false],
     price: [false, false, false],
   });
-  // const [displayData, setDisplayData] = useState<ProductType[]>(props.productData);
   const [displayData, setDisplayData] = useState<ProductType[]>([]);
   const [expandFilter, setExpandFilter] = useState<ExpandFilterType>({
     rating: true,
@@ -37,50 +30,46 @@ const Search = () => {
   });
 
   useEffect(() => {
-    setProducts(ProductData);
-    // setFilteredData(props.productData);
-    setDisplayData(products);
-    setFilteredData(products);
-    const newFilterData: ProductType[] = [];
-    for (let i = 0; i < filters.rating.length; i++) {
-      if (filters.rating[i]) {
-        filteredData.forEach((element) => {
-          if (element.rating === i + 1) {
-            newFilterData.push(element);
-          }
-        });
-      }
-    }
+    setDisplayData(ProductData);
+    setFilteredData(ProductData);
+    // const newFilterData: ProductType[] = [];
+    // for (let i = 0; i < filters.rating.length; i++) {
+    //   if (filters.rating[i]) {
+    //     filteredData.forEach((element) => {
+    //       if (element.rating === i + 1) {
+    //         newFilterData.push(element);
+    //       }
+    //     });
+    //   }
+    // }
 
-    // Price comparisons
-    if (filters.price[0]) {
-      filteredData.forEach((element) => {
-        if (Number(element.discountedPrice) < 500) {
-          newFilterData.push(element);
-        }
-      });
-    } else if (filters.price[1]) {
-      filteredData.forEach((element) => {
-        if (
-          Number(element.discountedPrice) >= 500 &&
-          Number(element.discountedPrice) <= 2000
-        ) {
-          newFilterData.push(element);
-        }
-      });
-    } else if (filters.price[2]) {
-      filteredData.forEach((element) => {
-        if (Number(element.discountedPrice) > 2000) {
-          newFilterData.push(element);
-        }
-      });
-    }
-    setDisplayData(newFilterData);
-  }, [filters]);
+    // // Price comparisons
+    // if (filters.price[0]) {
+    //   filteredData.forEach((element) => {
+    //     if (Number(element.discountedPrice) < 500) {
+    //       newFilterData.push(element);
+    //     }
+    //   });
+    // } else if (filters.price[1]) {
+    //   filteredData.forEach((element) => {
+    //     if (
+    //       Number(element.discountedPrice) >= 500 &&
+    //       Number(element.discountedPrice) <= 2000
+    //     ) {
+    //       newFilterData.push(element);
+    //     }
+    //   });
+    // } else if (filters.price[2]) {
+    //   filteredData.forEach((element) => {
+    //     if (Number(element.discountedPrice) > 2000) {
+    //       newFilterData.push(element);
+    //     }
+    //   });
+    // }
+    // setDisplayData(newFilterData);
+  }, [filters, filteredData]);
 
-  useEffect(() => {
-    setProducts(ProductData);
-  }, []);
+  // console.log(displayData);
 
   return (
     <div className="search-page">
@@ -236,7 +225,15 @@ const Search = () => {
             </div>
           </div>
         </div>
-        <div className="search-products"></div>
+        <div className="search-products">
+          {displayData.length === 0
+            ? "NO RESULTS FOUND. TRY CHANGING THE FILTERS."
+            : [...displayData].map((element, index) =>
+                element.setDisplayActive ? (
+                  <SingleProduct key={index} product={element} />
+                ) : null
+              )}
+        </div>
       </div>
     </div>
   );
