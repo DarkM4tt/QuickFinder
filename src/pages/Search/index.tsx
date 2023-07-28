@@ -31,54 +31,30 @@ const Search = () => {
 
   useEffect(() => {
     let filteredData = ProductData;
-    if (search.length) filteredData = filteredData.filter((element) => (element.productName.toLowerCase().includes(search.toLowerCase())));
-    if (filters.rating.includes(true)) filteredData = filteredData.filter((element) => (filters.rating[element.rating - 1]))
-    if (filters.price.includes(true)) filteredData = filteredData.filter((element) => {
-      if (filters.price[0] && Number(element.discountedPrice) < 500) return true;
-      if (filters.price[1] && Number(element.discountedPrice) >= 500 && Number(element.discountedPrice) <= 2000) return true;
-      if (filters.price[2] && Number(element.discountedPrice) > 2000) return true;
-      return false;
-    })
+    if (search.length)
+      filteredData = filteredData.filter((element) =>
+        element.productName.toLowerCase().includes(search.toLowerCase())
+      );
+    if (filters.rating.includes(true))
+      filteredData = filteredData.filter(
+        (element) => filters.rating[element.rating - 1]
+      );
+    if (filters.price.includes(true))
+      filteredData = filteredData.filter((element) => {
+        if (filters.price[0] && Number(element.discountedPrice) < 500)
+          return true;
+        if (
+          filters.price[1] &&
+          Number(element.discountedPrice) >= 500 &&
+          Number(element.discountedPrice) <= 2000
+        )
+          return true;
+        if (filters.price[2] && Number(element.discountedPrice) > 2000)
+          return true;
+        return false;
+      });
     setDisplayData(filteredData);
-
-    // const newFilterData: ProductType[] = [];
-    // for (let i = 0; i < filters.rating.length; i++) {
-    //   if (filters.rating[i]) {
-    //     filteredData.forEach((element) => {
-    //       if (element.rating === i + 1) {
-    //         newFilterData.push(element);
-    //       }
-    //     });
-    //   }
-    // }
-
-    // // Price comparisons
-    // if (filters.price[0]) {
-    //   filteredData.forEach((element) => {
-    //     if (Number(element.discountedPrice) < 500) {
-    //       newFilterData.push(element);
-    //     }
-    //   });
-    // } else if (filters.price[1]) {
-    //   filteredData.forEach((element) => {
-    //     if (
-    //       Number(element.discountedPrice) >= 500 &&
-    //       Number(element.discountedPrice) <= 2000
-    //     ) {
-    //       newFilterData.push(element);
-    //     }
-    //   });
-    // } else if (filters.price[2]) {
-    //   filteredData.forEach((element) => {
-    //     if (Number(element.discountedPrice) > 2000) {
-    //       newFilterData.push(element);
-    //     }
-    //   });
-    // }
-    // setDisplayData(newFilterData);
   }, [search, filters]);
-
-  // console.log(displayData);
 
   return (
     <div className="search-page">
@@ -191,7 +167,9 @@ const Search = () => {
                         setFilters({ ...filters, rating: newFilters });
                       }}
                     />
-                    <div className="rating-div">★★★★<span>★</span></div>
+                    <div className="rating-div">
+                      ★★★★<span>★</span>
+                    </div>
                   </li>
 
                   <li>
@@ -203,7 +181,9 @@ const Search = () => {
                         setFilters({ ...filters, rating: newFilters });
                       }}
                     />
-                    <div className="rating-div">★★★<span>★★</span></div>
+                    <div className="rating-div">
+                      ★★★<span>★★</span>
+                    </div>
                   </li>
 
                   <li>
@@ -215,7 +195,9 @@ const Search = () => {
                         setFilters({ ...filters, rating: newFilters });
                       }}
                     />
-                    <div className="rating-div">★★<span>★★★</span></div>
+                    <div className="rating-div">
+                      ★★<span>★★★</span>
+                    </div>
                   </li>
 
                   <li>
@@ -227,7 +209,9 @@ const Search = () => {
                         setFilters({ ...filters, rating: newFilters });
                       }}
                     />
-                    <div className="rating-div">★<span>★★★★</span></div>
+                    <div className="rating-div">
+                      ★<span>★★★★</span>
+                    </div>
                   </li>
                 </ul>
               </div>

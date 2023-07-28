@@ -10,7 +10,9 @@ const getTrendsData = () => {
 
   for (let i = 0; i < 5; i++) {
     const description: string = faker.commerce.productName();
-    const imgUrl: string = `https://source.unsplash.com/random/300x400/?${encodeURIComponent(description)}`;
+    const imgUrl: string = `https://source.unsplash.com/random/300x400/?${encodeURIComponent(
+      description
+    )}`;
     trendsData.push({
       imgUrl: imgUrl,
       description: description,
@@ -51,10 +53,17 @@ const getProductData = () => {
 
   for (let i = 0; i < 50; i++) {
     const productName: string = faker.commerce.productName();
-    const imgUrl: string = `https://source.unsplash.com/random/300x400/?${encodeURIComponent(productName)}`;
+    const imgUrl: string = `https://source.unsplash.com/random/300x400/?${encodeURIComponent(
+      productName
+    )}`;
     const originalPrice: string = faker.commerce.price(100, 5000);
-    const discountedPrice: string = faker.commerce.price(100, Number(originalPrice));
-    const rating = Math.round(Math.random() * (MAX_RATING - MIN_RATING) + MIN_RATING);
+    const discountedPrice: string = faker.commerce.price(
+      100,
+      Number(originalPrice)
+    );
+    const rating = Math.round(
+      Math.random() * (MAX_RATING - MIN_RATING) + MIN_RATING
+    );
     const noOfReviews = Math.floor(Math.random() * 1000 + 1);
     const isFavourite = false;
     const setDisplayActive = true;
