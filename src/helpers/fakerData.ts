@@ -9,8 +9,8 @@ const getTrendsData = () => {
   const trendsData: TrendDataType[] = [];
 
   for (let i = 0; i < 5; i++) {
-    const imgUrl: string = faker.image.people(300, 400);
     const description: string = faker.commerce.productName();
+    const imgUrl: string = `https://source.unsplash.com/random/300x400/?${encodeURIComponent(description)}`;
     trendsData.push({
       imgUrl: imgUrl,
       description: description,
