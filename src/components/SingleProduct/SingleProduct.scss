@@ -5,7 +5,7 @@
 
 @mixin absolute-position {
   margin: 0.5%;
-  position: absolute;
+  position: relative;
 }
 
 $discounted-price-color: #00c;
@@ -13,27 +13,29 @@ $hover-text-bg-color: rgba(42, 99, 204, 0.671);
 $hover-text-font-color: #fff;
 
 .product-result-card {
-  border-radius: 16px;
+  overflow-x: hidden;
   @include flex-column;
   margin: 4%;
   width: 100%;
 
   .image-container {
-    border-radius: 16px;
     width: 100%;
 
     .display {
-      border-radius: 16px;
     }
 
     .favourite-solid {
+      top: -25rem;
+      left: 16rem;
       @include absolute-position;
-      width: 2%;
+      width: 10%;
     }
 
     .favourite-outline {
+      top: -25rem;
+      left: 16rem;
       @include absolute-position;
-      width: 1.8%;
+      width: 10%;
     }
   }
 
@@ -54,10 +56,10 @@ $hover-text-font-color: #fff;
   text-align: center;
   background-color: $hover-text-bg-color;
   position: absolute;
-  margin-top: 18%;
+  margin-top: -6.1%;
   color: $hover-text-font-color;
-  width: 15.8%;
-  border-radius: 0px 0px 16px 16px;
+  width: 18.8%;
+  padding: 1rem 0;
 }
 
 .hide {
