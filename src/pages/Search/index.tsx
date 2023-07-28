@@ -18,7 +18,7 @@ type ExpandFilterType = {
 };
 
 const Search = () => {
-  const [filteredData, setFilteredData] = useState<ProductType[]>([]);
+  const [search, setSearch] = useState<string>("");
   const [filters, setFilters] = useState<FilterType>({
     rating: [false, false, false, false, false],
     price: [false, false, false],
@@ -30,8 +30,17 @@ const Search = () => {
   });
 
   useEffect(() => {
-    setDisplayData(ProductData);
-    setFilteredData(ProductData);
+    let filteredData = ProductData;
+    if (search.length) filteredData = filteredData.filter((element) => (element.productName.toLowerCase().includes(search.toLowerCase())));
+    if (filters.rating.includes(true)) filteredData = filteredData.filter((element) => (filters.rating[element.rating - 1]))
+    if (filters.price.includes(true)) filteredData = filteredData.filter((element) => {
+      if (filters.price[0] && Number(element.discountedPrice) < 500) return true;
+      if (filters.price[1] && Number(element.discountedPrice) >= 500 && Number(element.discountedPrice) <= 2000) return true;
+      if (filters.price[2] && Number(element.discountedPrice) > 2000) return true;
+      return false;
+    })
+    setDisplayData(filteredData);
+
     // const newFilterData: ProductType[] = [];
     // for (let i = 0; i < filters.rating.length; i++) {
     //   if (filters.rating[i]) {
@@ -67,7 +76,7 @@ const Search = () => {
     //   });
     // }
     // setDisplayData(newFilterData);
-  }, [filters, filteredData]);
+  }, [search, filters]);
 
   // console.log(displayData);
 
@@ -78,8 +87,8 @@ const Search = () => {
         <div className="search-box">
           <input
             placeholder="Search"
-            // value={query}
-            // onChange={(e) => setQuery(e.target.value)}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
           <button>
             <img src={SearchIcon} alt="search" />
@@ -182,7 +191,7 @@ const Search = () => {
                         setFilters({ ...filters, rating: newFilters });
                       }}
                     />
-                    <div className="rating-div">★★★★☆</div>
+                    <div className="rating-div">★★★★<span>★</span></div>
                   </li>
 
                   <li>
@@ -194,7 +203,7 @@ const Search = () => {
                         setFilters({ ...filters, rating: newFilters });
                       }}
                     />
-                    <div className="rating-div">★★★☆☆</div>
+                    <div className="rating-div">★★★<span>★★</span></div>
                   </li>
 
                   <li>
@@ -206,7 +215,7 @@ const Search = () => {
                         setFilters({ ...filters, rating: newFilters });
                       }}
                     />
-                    <div className="rating-div">★★☆☆☆</div>
+                    <div className="rating-div">★★<span>★★★</span></div>
                   </li>
 
                   <li>
@@ -218,7 +227,7 @@ const Search = () => {
                         setFilters({ ...filters, rating: newFilters });
                       }}
                     />
-                    <div className="rating-div">★☆☆☆☆</div>
+                    <div className="rating-div">★<span>★★★★</span></div>
                   </li>
                 </ul>
               </div>

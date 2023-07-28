@@ -101,16 +101,22 @@
                 width: 95%;
                 // padding: 0.5%;
                 flex-direction: row;
-                justify-content: space-between;
+                gap: 1rem;
 
-                input :checked {
-                  background-color: black;
+                input {
+                  cursor: pointer;
                 }
 
                 .rating-div {
-                  // padding-left: 1%;
                   font-size: 1.4em;
                   color: black;
+                  margin-bottom: 5px;
+                  user-select: none;
+                  color: #fdd33d;
+
+                  span {
+                    color: #cdccc8;
+                  }
                 }
 
                 .content {

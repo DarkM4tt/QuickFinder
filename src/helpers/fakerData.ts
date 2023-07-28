@@ -50,18 +50,11 @@ const getProductData = () => {
   const productData: ProductType[] = [];
 
   for (let i = 0; i < 50; i++) {
-    const imgUrl: string = faker.image.people(300, 400);
     const productName: string = faker.commerce.productName();
-    // Hard-coded the value for demo purposes
-    const currencyPrefix: string = "Rs.";
+    const imgUrl: string = `https://source.unsplash.com/random/300x400/?${encodeURIComponent(productName)}`;
     const originalPrice: string = faker.commerce.price(100, 5000);
-    const discountedPrice: string = faker.commerce.price(
-      100,
-      Number(originalPrice)
-    );
-    const rating = Math.round(
-      Math.random() * (MAX_RATING - MIN_RATING) + MIN_RATING
-    );
+    const discountedPrice: string = faker.commerce.price(100, Number(originalPrice));
+    const rating = Math.round(Math.random() * (MAX_RATING - MIN_RATING) + MIN_RATING);
     const noOfReviews = Math.floor(Math.random() * 1000 + 1);
     const isFavourite = false;
     const setDisplayActive = true;
@@ -69,7 +62,7 @@ const getProductData = () => {
     productData.push({
       imgUrl: imgUrl,
       productName: productName,
-      currencyPrefix: currencyPrefix,
+      currencyPrefix: "Rs.",
       originalPrice: originalPrice,
       discountedPrice: discountedPrice,
       rating: rating,
